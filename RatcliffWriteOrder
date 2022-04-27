@@ -1,0 +1,60 @@
+//CREATOR: Alexandor Ratcliff
+//COURSE: CPT 187
+//PURPOSE: Writes the information about an order the user makes to the file
+//START DATE: 4/20/2022
+package edu.apt187.ratcliff.exercise6;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+//start of WriteOrder class
+public class WriteOrder 
+{
+	//Declares and initializes the constants for the WriteOrder class
+	private boolean fileFoundFlag = false;
+	private String masterFileName = "";
+	private int recordCount = 0;
+
+	//Beginning of the non-default constructor
+	public WriteOrder(String borrowedFileName)
+	{
+		masterFileName = borrowedFileName;
+	}//End of non-default constructor
+
+	//sets the information to be written
+	public void setWriteOrder(int borrowedID, String borrowedItemName, double borrowedItemPrice, int borrowedQuantity,
+			double borrowedOrderCost)
+	{
+		try
+		{
+			PrintWriter filePW = new PrintWriter(new FileWriter(masterFileName, true));
+			filePW.printf("%n%d\t%s\t%f\t%d\t%f", borrowedID, borrowedItemName, borrowedItemPrice, borrowedQuantity, borrowedOrderCost);
+			recordCount++;
+			fileFoundFlag = true;
+			filePW.close();
+		}//End of try
+		catch(IOException ex)
+		{
+			fileFoundFlag = false;
+		}//End of catch
+	}//End of setWriteOrder
+
+	//start of getters
+
+	//gets the fileFoundFlag
+	public boolean getFileFoundFlag()
+	{
+		return fileFoundFlag;
+	}//End of getFileFoundFlag
+
+	//gets the file name
+	public String getFileName()
+	{
+		return masterFileName;
+	}//End of getFileName
+
+	//gets the record count
+	public int getRecordCount()
+	{
+		return recordCount;
+	}//End of getRecordCount
+}//End of WriteOrder class
